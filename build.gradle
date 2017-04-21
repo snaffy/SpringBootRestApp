@@ -31,3 +31,7 @@ dependencies {
 	compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.9.0.pr2'
 
 }
+
+bootRun {
+	systemProperties System.properties
+}

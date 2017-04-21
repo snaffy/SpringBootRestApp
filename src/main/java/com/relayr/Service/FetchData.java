@@ -52,9 +52,22 @@ public class FetchData {
 
     private Map<Integer,Sensor> sensorMap = new HashMap<>() ;
 
+    public Map<Integer, Sensor> getSensorMap() {
+        return sensorMap;
+    }
+
+    private void setSensorMap(Map<Integer, Sensor> sensorMap) {
+        this.sensorMap = sensorMap;
+    }
+
     public FetchData()
     {
-        this.getFixedSensorHashMap();
+//        this.getFixedSensorHashMap();
+    }
+
+    public FetchData(String params)
+    {
+        this.setFixedSensorHashMap();
     }
 
 
@@ -68,12 +81,12 @@ public class FetchData {
         return null;
     }
 
-    public Map<Integer,Sensor> getFixedSensorHashMap()
+    private void setFixedSensorHashMap()
     {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
             Sensor[] sensorArray =  mapper.readValue(this.tmp,Sensor[].class);
-
+            Map<Integer,Sensor> sensorMap = new HashMap<>() ;
             for(Sensor element : sensorArray){
                 sensorMap.put(element.getId(),element);
             }
@@ -85,12 +98,10 @@ public class FetchData {
                     sensorMap.get(entry.getKey()).setMasterSensor(tmpSensor);
                 }
             }
-            return sensorMap;
+           this.setSensorMap(sensorMap);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
     }
-
 }

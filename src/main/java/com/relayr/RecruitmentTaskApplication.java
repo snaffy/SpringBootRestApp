@@ -17,13 +17,19 @@ import java.util.*;
 @SpringBootApplication
 public class RecruitmentTaskApplication {
 
-	@Autowired
-	private static FetchData fetchData = new FetchData();
+//	@Autowired
+//	private static FetchData fetchData;
 
 	public static void main(String[] args) throws IOException {
 
-		Map<Integer,Sensor> map = fetchData.getFixedSensorHashMap();
-
+//		if(true)
+//		{
+//			fetchData = new FetchData("asd");
+//		}else {
+//			fetchData = new FetchData();
+//		}
+//
+//		fetchData.getSensorMap();
 
 
 //		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
