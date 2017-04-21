@@ -1,16 +1,9 @@
 package com.relayr;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.relayr.Service.FetchData;
-import com.relayr.model.Sensor;
-import org.omg.CORBA.Object;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.relayr.domain.Sensor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.yaml.snakeyaml.Yaml;
 
-import javax.xml.transform.Result;
 import java.io.IOException;
 import java.util.*;
 

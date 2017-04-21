@@ -1,9 +1,7 @@
-package com.relayr.model;
+package com.relayr.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.HashMap;
 
 /**
  * Created by azygm on 20.04.2017.
