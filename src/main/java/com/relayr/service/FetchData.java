@@ -2,10 +2,12 @@ package com.relayr.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.relayr.controller.EngineController;
 import com.relayr.domain.Sensor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
+import org.apache.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +16,8 @@ import java.util.Map;
  */
 @Service
 public class FetchData {
+
+//    private static Logger logger = Logger.getLogger(EngineController.class);
 
     private String tmp = "- id: \"3142\"\n" +
             "  engine: \"123\"\n" +
@@ -49,58 +53,47 @@ public class FetchData {
             "  min_value: 0\n" +
             "  max_value: 100";
 
-    private Map<Integer,Sensor> sensorMap = new HashMap<>() ;
-
-    public Map<Integer, Sensor> getSensorMap() {
-        return sensorMap;
-    }
-
-    private void setSensorMap(Map<Integer, Sensor> sensorMap) {
-        this.sensorMap = sensorMap;
-    }
+    // -Duri="https://raw.githubusercontent.com/relayr/pdm-test/master/sensors.yml" -q
 
     public FetchData()
     {
-//        this.getFixedSensorHashMap();
     }
 
-    public FetchData(String params)
-    {
-        this.setFixedSensorHashMap();
-    }
-
-
-    private Sensor[] getData() {
+    public Map<Integer,Sensor> getDataByUri(String uri){
+        RestTemplate restTemplate = new RestTemplate();
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        Map<Integer,Sensor> sensorMap = new HashMap<>();
         try {
-            return mapper.readValue(this.tmp,Sensor[].class);
+            String result = restTemplate.getForObject(uri, String.class);
+            Sensor[] sensorArray =  mapper.readValue(result,Sensor[].class);
+            sensorMap = this.convertArrayToHashMap(sensorArray);
+            sensorMap = this.convertStringMasterIdToObjectMaster(sensorMap);
+            return sensorMap;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return sensorMap;
     }
 
-    private void setFixedSensorHashMap()
+    private Map<Integer,Sensor> convertArrayToHashMap(Sensor[] sensorArray)
     {
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        try {
-            Sensor[] sensorArray =  mapper.readValue(this.tmp,Sensor[].class);
-            Map<Integer,Sensor> sensorMap = new HashMap<>() ;
-            for(Sensor element : sensorArray){
-                sensorMap.put(element.getId(),element);
-            }
-            for(Map.Entry<Integer, Sensor> entry : sensorMap.entrySet()){
-
-                if( entry.getValue().getMasterStringSensorId() != null) {
-                    Integer tmpKey = Integer.parseInt(entry.getValue().getMasterStringSensorId());
-                    Sensor tmpSensor = sensorMap.get(tmpKey);
-                    sensorMap.get(entry.getKey()).setMasterSensor(tmpSensor);
-                }
-            }
-           this.setSensorMap(sensorMap);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        Map<Integer,Sensor> sensorMap = new HashMap<>();
+        for(Sensor element : sensorArray){
+            sensorMap.put(element.getId(),element);
         }
+        return sensorMap;
     }
+
+    private Map<Integer,Sensor> convertStringMasterIdToObjectMaster (Map<Integer,Sensor> sensorMap)
+    {
+        for(Map.Entry<Integer, Sensor> entry : sensorMap.entrySet()){
+            if( entry.getValue().getMasterStringSensorId() != null) {
+                Integer tmpKey = Integer.parseInt(entry.getValue().getMasterStringSensorId());
+                Sensor tmpSensor = sensorMap.get(tmpKey);
+                sensorMap.get(entry.getKey()).setMasterSensor(tmpSensor);
+            }
+        }
+        return sensorMap;
+    }
+
 }

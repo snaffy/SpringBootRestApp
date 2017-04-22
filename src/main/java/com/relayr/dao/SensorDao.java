@@ -10,6 +10,9 @@ import java.util.Map;
  */
 public interface SensorDao {
     Map<Integer,Sensor> getAllSensor();
-    void editSensor(Sensor sensor);
+    Sensor getSensor(int sensorId);
+    void incrementSensorValue(Sensor sensor, int newValue);
+    void decrementSensorValue(Sensor sensor, int value);
+    void setSensorValue(Sensor sensor, int value);
     List<Integer> getInoperativeEngines (int pressureTreshold, int tempTreshold);
 }

@@ -1,16 +1,10 @@
 package com.relayr.service;
 
 import com.relayr.dao.LocalSensorDaoImp;
+import com.relayr.domain.Query;
 import com.relayr.domain.Sensor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,27 +13,7 @@ import java.util.Map;
  */
 
 @Service
-//@ComponentScan
-//@PropertySource("classpath:/application.properties")
 public class SensorServiceImp implements SensorService {
-
-//    private Map<Integer, Sensor> hashMap = new HashMap<>();
-//
-//    @Autowired
-//    private FetchData fetchData ;
-//            // -Duri="TEST" -q
-//
-//    public SensorServiceImp(@Value("${uri}") String uri) {
-//        if (!uri.equals("false")) {
-//            fetchData = new FetchData(uri);
-//            this.hashMap = fetchData.getSensorMap();
-//        }
-//    }
-
-//    public Map<Integer,Sensor> getAll()
-//    {
-//        return hashMap;
-//    }
 
     @Autowired
     private LocalSensorDaoImp localSensorDaoImp;
@@ -50,8 +24,19 @@ public class SensorServiceImp implements SensorService {
     }
 
     @Override
-    public void editSensor(Sensor sensor) {
+    public boolean checkSetPossibility(Sensor sensor, int value) {
+        return value >= sensor.getMinValue() && value <= sensor.getMaxValue();
+    }
 
+    @Override
+    public boolean checkIncrementPossibility(Sensor sensor, int value) {
+        return sensor.getMaxValue() >= sensor.getValue() + value;
+
+    }
+
+    @Override
+    public boolean checkDecrementPossibility(Sensor sensor, int value) {
+        return sensor.getMinValue() <= sensor.getValue() - value;
     }
 
     @Override
@@ -59,8 +44,47 @@ public class SensorServiceImp implements SensorService {
         return localSensorDaoImp.getInoperativeEngines(pressureTreshold,tempTreshold);
     }
 
-//    @Bean
-//    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-//        return new PropertySourcesPlaceholderConfigurer();
-//    }
+    @Override
+    public void incrementSensorValue(Sensor sensor, int value) {
+       localSensorDaoImp.incrementSensorValue(sensor, value);
+    }
+
+    @Override
+    public void decrementSensorValue(Sensor sensor, int value) {
+        localSensorDaoImp.decrementSensorValue(sensor,value);
+    }
+
+    @Override
+    public void setSensorValue(Sensor sensor, int newValue) {
+        localSensorDaoImp.setSensorValue(sensor,newValue);
+    }
+
+    public Sensor getSensor(int sensorId){
+        return localSensorDaoImp.getSensor(sensorId);
+    }
+
+    public boolean checkModifyResourcesPossibility(Query query, Sensor sensor) {
+        switch (query.getOperation())
+        {
+            case "increment" : return checkIncrementPossibility(sensor, query.getValue());
+
+            case "decrement" : return checkDecrementPossibility(sensor,query.getValue());
+
+            case "set" : return checkSetPossibility(sensor,query.getValue());
+
+            default: return false;
+        }
+    }
+
+    public void modifyResource(Query query, Sensor sensor) {
+        switch (query.getOperation())
+        {
+            case "increment" :  incrementSensorValue(sensor, query.getValue());
+                                break;
+            case "decrement" :  decrementSensorValue(sensor,query.getValue());
+                                break;
+            case "set" :  setSensorValue(sensor,query.getValue());
+                                break;
+        }
+    }
 }

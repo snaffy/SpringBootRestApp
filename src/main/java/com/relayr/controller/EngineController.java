@@ -1,11 +1,12 @@
 package com.relayr.controller;
 
+import com.relayr.domain.Query;
 import com.relayr.service.SensorServiceImp;
 import com.relayr.domain.Sensor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -24,9 +25,27 @@ public class EngineController {
         return sensorService.getAllSensor();
     }
 
-    @RequestMapping("/engines")
+    @RequestMapping(value = "/engines",method = RequestMethod.GET)
     public List<Integer> getInoperativeEngines(@RequestParam(value = "pressure_threshold") Integer pressureThreshold,
                                                @RequestParam(value = "temp_threshold") Integer tempTreshold){
         return sensorService.getInoperativeEngines(pressureThreshold,tempTreshold);
     }
+
+    @RequestMapping(value = "/sensor/{sensorId}",method = RequestMethod.POST)
+    public ResponseEntity<?> getInoperativeEngines(@PathVariable Integer sensorId,
+                                                   @RequestBody Query query){
+        Sensor sensor = sensorService.getSensor(sensorId);
+        if(sensor != null)
+        {
+            if(sensorService.checkModifyResourcesPossibility(query,sensor))
+            {
+                sensorService.modifyResource(query, sensor);
+                return ResponseEntity.status(HttpStatus.OK).build();
+            }
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+
+
 }

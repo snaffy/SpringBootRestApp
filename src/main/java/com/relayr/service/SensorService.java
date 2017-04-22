@@ -10,6 +10,11 @@ import java.util.Map;
  */
 public interface SensorService {
     Map<Integer,Sensor> getAllSensor();
-    void editSensor(Sensor sensor);
     List<Integer> getInoperativeEngines (int pressureTreshold, int tempTreshold);
+    void incrementSensorValue(Sensor sensor, int value);
+    void decrementSensorValue(Sensor sensor, int value);
+    void setSensorValue(Sensor sensor, int newValue);
+    boolean checkSetPossibility(Sensor sensor, int value);
+    boolean checkIncrementPossibility(Sensor sensor, int value);
+    boolean checkDecrementPossibility(Sensor sensor, int value);
 }

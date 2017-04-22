@@ -22,12 +22,12 @@ public class LocalSensorDaoImp  implements SensorDao{
     private Map<Integer, Sensor> hashMap = new HashMap<>();
 
     @Autowired
-    private FetchData fetchData ;
+    private FetchData fetchData = new FetchData() ;
 
     public LocalSensorDaoImp(@Value("${uri}") String uri) {
         if (!uri.equals("false")) {
-            fetchData = new FetchData(uri);
-            this.hashMap = fetchData.getSensorMap();
+//            fetchData = new FetchData(uri);
+            this.hashMap = fetchData.getDataByUri(uri);
         }
     }
 
@@ -37,8 +37,23 @@ public class LocalSensorDaoImp  implements SensorDao{
     }
 
     @Override
-    public void editSensor(Sensor sensor) {
+    public Sensor getSensor(int sensorId) {
+        return hashMap.get(sensorId);
+    }
 
+    @Override
+    public void incrementSensorValue(Sensor sensor, int value) {
+        sensor.setValue(sensor.getValue() + value);
+    }
+
+    @Override
+    public void decrementSensorValue(Sensor sensor, int value) {
+        sensor.setValue(sensor.getValue() - value);
+    }
+
+    @Override
+    public void setSensorValue(Sensor sensor, int newValue) {
+        sensor.setValue(newValue);
     }
 
     @Override
@@ -61,4 +76,5 @@ public class LocalSensorDaoImp  implements SensorDao{
         }
         return inoperativeEndineList;
     }
+
 }
