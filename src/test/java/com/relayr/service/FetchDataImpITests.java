@@ -15,10 +15,12 @@ import static org.junit.Assert.assertEquals;
  * Created by azygm on 22.04.2017.
  */
 public class FetchDataImpITests {
-
+    /**
+     * Test of testParseDataFileExists method, of class FetchDataImp.
+     */
     @Test
     public void testParseDataFileExists() {
-        String tmp = "- id: \"3142\"\n" +
+        String dataExample = "- id: \"3142\"\n" +
             "  engine: \"123\"\n" +
             "  type: \"pressure\"\n" +
             "  name: \"Engine 123\"\n" +
@@ -37,28 +39,35 @@ public class FetchDataImpITests {
         Map<Integer, Sensor> expResult = new HashMap<>();
         expResult.put(3142,sensor);
 
-        Map<Integer, Sensor> result = instance.parseData(tmp);
+        Map<Integer, Sensor> result = instance.parseData(dataExample);
+
         assertEquals(expResult, result);
-        }
+    }
 
-
+    /**
+     * Test of testParseDataFileNotExists method, of class FetchDataImp.
+     */
     @Test
     public void testParseDataFileNotExists() {
-        String tmp = "";
+        String dataExample = "";
         Map<Integer, Sensor> expResult = new HashMap<>();
         FetchDataImp instance = new FetchDataImp();
-        Map<Integer, Sensor> result = instance.parseData(tmp);
+
+        Map<Integer, Sensor> result = instance.parseData(dataExample);
+
         assertEquals(expResult, result);
     }
 
     /**
      * Test of getDataByUri method, of class FetchDataImp.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetDataByUri() {
         String uri = "";
         FetchDataImp instance = new FetchDataImp();
-        instance.getDataByUri(uri);
+        String result = instance.getDataByUri(uri);
+
+        assertEquals(uri, result);
     }
     
 }
