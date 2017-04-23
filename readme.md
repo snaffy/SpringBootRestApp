@@ -1,4 +1,4 @@
-Java/Spring Boot/Gradle were employed to create an applicaton. 
+#Java/Spring Boot/Gradle were employed to create an applicaton. 
 How to run:
 This application is packaged as a war which has Tomcat 8 embedded. No Tomcat or JBoss installation is necessary. You run it using the gradle command. 
 Setp 1: navigate to application directory 
