@@ -3,9 +3,16 @@ Java/Spring Boot/Gradle were employed to create an applicaton.
 This application is packaged as a war which has Tomcat 8 embedded. No Tomcat or JBoss installation is necessary. You run it using the gradle command. 
 * Navigate to application directory 
 * Build the project
-  * ./gradlew build
+    ```cmd
+   $ ./gradlew build
+   ```
+  * 
 * Run the project 
-  * ./gradlew bootRun [-Dserver=""]
+   ```cmd
+   $ ./gradlew bootRun [-Dserver=""]
+   ```
+   
+   
   * -Dserver (it an optional parameter that contains the URL with the YAML input file)
   * ./gradlew bootRun -Dserver="https://raw.githubusercontent.com/relayr/pdm-test/master/sensors.yml" 
   * Once started you can access the APIs on port 8080, e.g. http://localhost:8080/
