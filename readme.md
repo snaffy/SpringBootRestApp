@@ -24,8 +24,8 @@ In addition, the application can be run as a docker container
    ```
 * Run the project
  ```cmd
-  docker run -p 8080:8080 -t work/recruitment-task 
-  docker run -p 8080:8080 -t work/recruitment-task  [-Dserver]
+   docker run -p 8080:8080 -t work/recruitment-task 
+   docker run -p 8080:8080 -t work/recruitment-task  [-Dserver]
   ```
 
  
