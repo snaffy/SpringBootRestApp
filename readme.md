@@ -15,7 +15,7 @@ In addition, the application can be run as a docker container
 * Build and push images via gradle
   * ./gradlew build buildDocker
 * Run the project
- * docker run -p 8080:8080 -t work/recruitment-task 
- * docker run -p 8080:8080 -t work/recruitment-task  [ -Dserver]
+  * docker run -p 8080:8080 -t work/recruitment-task 
+  * docker run -p 8080:8080 -t work/recruitment-task  [ -Dserver]
 
  
