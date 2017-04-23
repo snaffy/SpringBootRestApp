@@ -11,7 +11,7 @@ public class Sensor {
     @JsonProperty("id")
     private int id;
     @JsonProperty("engine")
-    private int engineId;
+    private String engineId;
     @JsonProperty("type")
     private String type;
 
@@ -25,10 +25,6 @@ public class Sensor {
     private int minValue;
     @JsonProperty("max_value")
     private int maxValue;
-
-
-    public Sensor() {
-    }
 
 
     public String getMasterStringSensorId() {
@@ -47,11 +43,11 @@ public class Sensor {
         this.id = id;
     }
 
-    public int getEngineId() {
+    public String getEngineId() {
         return engineId;
     }
 
-    public void setEngineId(int engineId) {
+    public void setEngineId(String engineId) {
         this.engineId = engineId;
     }
 
@@ -87,15 +83,12 @@ public class Sensor {
         this.minValue = minValue;
     }
 
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+
     public int getMaxValue() {
         return maxValue;
     }
 
-    public void setMaxValue(int maxValue) {
-        this.maxValue = maxValue;
-    }
-//   private void setMasterStringSensorId(String masterStringSensorId, HashMap<String,Sensor> hashMap){
-//
-//        this
-//   }
 }

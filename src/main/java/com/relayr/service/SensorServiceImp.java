@@ -24,45 +24,11 @@ public class SensorServiceImp implements SensorService {
     }
 
     @Override
-    public boolean checkSetPossibility(Sensor sensor, int value) {
-        return value >= sensor.getMinValue() && value <= sensor.getMaxValue();
-    }
-
-    @Override
-    public boolean checkIncrementPossibility(Sensor sensor, int value) {
-        return sensor.getMaxValue() >= sensor.getValue() + value;
-
-    }
-
-    @Override
-    public boolean checkDecrementPossibility(Sensor sensor, int value) {
-        return sensor.getMinValue() <= sensor.getValue() - value;
-    }
-
-    @Override
-    public List<Integer> getInoperativeEngines(int pressureTreshold, int tempTreshold) {
-        return localSensorDaoImp.getInoperativeEngines(pressureTreshold,tempTreshold);
-    }
-
-    @Override
-    public void incrementSensorValue(Sensor sensor, int value) {
-       localSensorDaoImp.incrementSensorValue(sensor, value);
-    }
-
-    @Override
-    public void decrementSensorValue(Sensor sensor, int value) {
-        localSensorDaoImp.decrementSensorValue(sensor,value);
-    }
-
-    @Override
-    public void setSensorValue(Sensor sensor, int newValue) {
-        localSensorDaoImp.setSensorValue(sensor,newValue);
-    }
-
     public Sensor getSensor(int sensorId){
         return localSensorDaoImp.getSensor(sensorId);
     }
 
+    @Override
     public boolean checkModifyResourcesPossibility(Query query, Sensor sensor) {
         switch (query.getOperation())
         {
@@ -76,15 +42,47 @@ public class SensorServiceImp implements SensorService {
         }
     }
 
+    @Override
     public void modifyResource(Query query, Sensor sensor) {
         switch (query.getOperation())
         {
             case "increment" :  incrementSensorValue(sensor, query.getValue());
-                                break;
+                break;
             case "decrement" :  decrementSensorValue(sensor,query.getValue());
-                                break;
+                break;
             case "set" :  setSensorValue(sensor,query.getValue());
-                                break;
+                break;
         }
     }
+
+    @Override
+    public List<String> getInoperativeEngines(int pressureTreshold, int tempTreshold) {
+        return localSensorDaoImp.getInoperativeEngines(pressureTreshold,tempTreshold);
+    }
+
+    protected boolean checkSetPossibility(Sensor sensor, int value) {
+        return value >= sensor.getMinValue() && value <= sensor.getMaxValue();
+    }
+
+    protected boolean checkIncrementPossibility(Sensor sensor, int value) {
+        return sensor.getMaxValue() >= sensor.getValue() + value;
+
+    }
+
+    protected boolean checkDecrementPossibility(Sensor sensor, int value) {
+        return sensor.getMinValue() <= sensor.getValue() - value;
+    }
+
+    protected void incrementSensorValue(Sensor sensor, int value) {
+       localSensorDaoImp.incrementSensorValue(sensor, value);
+    }
+
+    protected void decrementSensorValue(Sensor sensor, int value) {
+        localSensorDaoImp.decrementSensorValue(sensor,value);
+    }
+
+    protected void setSensorValue(Sensor sensor, int newValue) {
+        localSensorDaoImp.setSensorValue(sensor,newValue);
+    }
+
 }

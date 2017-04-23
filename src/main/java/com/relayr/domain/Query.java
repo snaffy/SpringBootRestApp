@@ -1,7 +1,5 @@
 package com.relayr.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Created by azygm on 21.04.2017.
  */

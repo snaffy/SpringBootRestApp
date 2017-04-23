@@ -1,7 +1,6 @@
 package com.relayr.dao;
 
 import com.relayr.domain.Sensor;
-
 import java.util.List;
 import java.util.Map;
 
@@ -14,5 +13,5 @@ public interface SensorDao {
     void incrementSensorValue(Sensor sensor, int newValue);
     void decrementSensorValue(Sensor sensor, int value);
     void setSensorValue(Sensor sensor, int value);
-    List<Integer> getInoperativeEngines (int pressureTreshold, int tempTreshold);
+    List<String> getInoperativeEngines (int pressureTreshold, int tempTreshold);
 }
