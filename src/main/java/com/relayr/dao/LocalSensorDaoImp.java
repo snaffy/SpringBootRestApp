@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,8 @@ public class LocalSensorDaoImp  implements SensorDao{
 
     public LocalSensorDaoImp(@Value("${server}") String server) {
         if (!server.equals("false")) {
-            this.hashMap = fetchData.getDataByUri(server);
+            String dataFromUri = fetchData.getDataByUri(server);
+            this.hashMap = fetchData.parseData(dataFromUri);
         }
     }
 
@@ -82,27 +84,5 @@ public class LocalSensorDaoImp  implements SensorDao{
     {
         return sensor.getType().equals("temperature") && sensor.getValue() >= tempTreshold;
     }
-
-
-//    @Override
-//    public List<String> getInoperativeEngines(int pressureTreshold, int tempTreshold) {
-//       List<String> inoperativeEndineList = new ArrayList<>();
-//
-//        for(Map.Entry<Integer, Sensor> entry : hashMap.entrySet()) {
-//            Sensor sensorTmp = entry.getValue();
-//            if (sensorTmp.getType().equals("temperature")) {
-//                if (sensorTmp.getValue() >= tempTreshold) {
-//                    Sensor masterSensor = sensorTmp.getMasterSensor();
-//                    if (masterSensor.getValue() <= pressureTreshold) {
-//                        String engineID = masterSensor.getEngineId();
-//                        if (!inoperativeEndineList.contains(engineID)) {
-//                            inoperativeEndineList.add(engineID);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return inoperativeEndineList;
-//    }
 
 }

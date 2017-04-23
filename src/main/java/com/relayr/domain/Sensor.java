@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Created by azygm on 20.04.2017.
+ * Created by azygm on 21.04.2017.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Sensor {
@@ -91,4 +91,35 @@ public class Sensor {
         return maxValue;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Sensor sensor = (Sensor) o;
+
+        if (id != sensor.id) return false;
+        if (value != sensor.value) return false;
+        if (minValue != sensor.minValue) return false;
+        if (maxValue != sensor.maxValue) return false;
+        if (engineId != null ? !engineId.equals(sensor.engineId) : sensor.engineId != null) return false;
+        if (type != null ? !type.equals(sensor.type) : sensor.type != null) return false;
+        if (masterSensor != null ? !masterSensor.equals(sensor.masterSensor) : sensor.masterSensor != null)
+            return false;
+        return masterStringSensorId != null ? masterStringSensorId.equals(sensor.masterStringSensorId) : sensor.masterStringSensorId == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (engineId != null ? engineId.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (masterSensor != null ? masterSensor.hashCode() : 0);
+        result = 31 * result + (masterStringSensorId != null ? masterStringSensorId.hashCode() : 0);
+        result = 31 * result + value;
+        result = 31 * result + minValue;
+        result = 31 * result + maxValue;
+        return result;
+    }
 }

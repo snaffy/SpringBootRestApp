@@ -60,28 +60,28 @@ public class SensorServiceImp implements SensorService {
         return localSensorDaoImp.getInoperativeEngines(pressureTreshold,tempTreshold);
     }
 
-    protected boolean checkSetPossibility(Sensor sensor, int value) {
+    private boolean checkSetPossibility(Sensor sensor, int value) {
         return value >= sensor.getMinValue() && value <= sensor.getMaxValue();
     }
 
-    protected boolean checkIncrementPossibility(Sensor sensor, int value) {
+    private boolean checkIncrementPossibility(Sensor sensor, int value) {
         return sensor.getMaxValue() >= sensor.getValue() + value;
 
     }
 
-    protected boolean checkDecrementPossibility(Sensor sensor, int value) {
+    private boolean checkDecrementPossibility(Sensor sensor, int value) {
         return sensor.getMinValue() <= sensor.getValue() - value;
     }
 
-    protected void incrementSensorValue(Sensor sensor, int value) {
+    private void incrementSensorValue(Sensor sensor, int value) {
        localSensorDaoImp.incrementSensorValue(sensor, value);
     }
 
-    protected void decrementSensorValue(Sensor sensor, int value) {
+    private void decrementSensorValue(Sensor sensor, int value) {
         localSensorDaoImp.decrementSensorValue(sensor,value);
     }
 
-    protected void setSensorValue(Sensor sensor, int newValue) {
+    private void setSensorValue(Sensor sensor, int newValue) {
         localSensorDaoImp.setSensorValue(sensor,newValue);
     }
 

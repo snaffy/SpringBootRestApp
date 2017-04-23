@@ -5,8 +5,9 @@ import com.relayr.domain.Sensor;
 import java.util.Map;
 
 /**
- * Created by azygm on 22.04.2017.
+ * Created by azygm on 21.04.2017.
  */
 public interface FetchData {
-    Map<Integer,Sensor> getDataByUri(String uri);
+    Map<Integer,Sensor> parseData(String uri);
+    String getDataByUri(String uri);
 }
