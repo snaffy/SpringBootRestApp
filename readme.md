@@ -4,17 +4,16 @@ This application is packaged as a war which has Tomcat 8 embedded. No Tomcat or 
 * Navigate to application directory 
 * Build the project
     ```cmd
-   $ ./gradlew build
+   ./gradlew build
    ```
-  * 
 * Run the project 
    ```cmd
-   $ ./gradlew bootRun [-Dserver=""]
+   ./gradlew bootRun [-Dserver=""]
    ```
-   
-   
   * -Dserver (it an optional parameter that contains the URL with the YAML input file)
-  * ./gradlew bootRun -Dserver="https://raw.githubusercontent.com/relayr/pdm-test/master/sensors.yml" 
+   ```cmd
+    ./gradlew bootRun -Dserver="https://raw.githubusercontent.com/relayr/pdm-test/master/sensors.yml" 
+   ```
   * Once started you can access the APIs on port 8080, e.g. http://localhost:8080/
   * To run unit tests we can use a ./gradlew test  command
  
