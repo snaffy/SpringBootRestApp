@@ -12,7 +12,7 @@ This application is packaged as a war which has Tomcat 8 embedded. No Tomcat or 
    ```
   * -Dserver (it is an optional parameter that contains the URL with the YAML input file)
    ```cmd
-   ./gradlew bootRun -Dserver="https://raw.githubusercontent.com/relayr/pdm-test/master/sensors.yml" 
+   ./gradlew bootRun -Dserver="https://github.com/snaffy/SpringBootRestApp/blob/master/sensors/sensors.yml" 
    ```
  * Once started you can access the APIs on port 8080, e.g. http://localhost:8080/
  * To run unit tests we can use a ./gradlew test  command
