@@ -1,6 +1,6 @@
-package com.relayr.service;
+package org.restsensors.service;
 
-import com.relayr.domain.Sensor;
+import org.restsensors.domain.Sensor;
 
 import java.util.Map;
 

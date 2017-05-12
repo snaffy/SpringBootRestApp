@@ -1,6 +1,6 @@
-package com.relayr.service;
-import com.relayr.domain.Query;
-import com.relayr.domain.Sensor;
+package org.restsensors.service;
+import org.restsensors.domain.Query;
+import org.restsensors.domain.Sensor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;

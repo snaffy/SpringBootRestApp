@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.relayr.service;
+package org.restsensors.service;
 
-import com.relayr.domain.Sensor;
+import org.restsensors.domain.Sensor;
 import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;

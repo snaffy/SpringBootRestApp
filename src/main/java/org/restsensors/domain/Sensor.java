@@ -1,4 +1,4 @@
-package com.relayr.domain;
+package org.restsensors.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

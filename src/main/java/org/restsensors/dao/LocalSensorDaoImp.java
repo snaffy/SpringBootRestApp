@@ -1,8 +1,8 @@
-package com.relayr.dao;
+package org.restsensors.dao;
 
-import com.relayr.domain.Sensor;
-import com.relayr.service.FetchData;
-import com.relayr.service.FetchDataImp;
+import org.restsensors.domain.Sensor;
+import org.restsensors.service.FetchData;
+import org.restsensors.service.FetchDataImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;

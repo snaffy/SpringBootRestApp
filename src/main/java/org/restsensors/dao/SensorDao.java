@@ -1,6 +1,7 @@
-package com.relayr.dao;
+package org.restsensors.dao;
 
-import com.relayr.domain.Sensor;
+import org.restsensors.domain.Sensor;
+
 import java.util.List;
 import java.util.Map;
 

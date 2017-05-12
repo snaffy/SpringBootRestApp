@@ -1,8 +1,8 @@
-package com.relayr.service;
+package org.restsensors.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.relayr.domain.Sensor;
+import org.restsensors.domain.Sensor;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

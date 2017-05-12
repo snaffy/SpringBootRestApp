@@ -1,8 +1,8 @@
-package com.relayr.service;
+package org.restsensors.service;
 
-import com.relayr.dao.LocalSensorDaoImp;
-import com.relayr.domain.Query;
-import com.relayr.domain.Sensor;
+import org.restsensors.dao.LocalSensorDaoImp;
+import org.restsensors.domain.Query;
+import org.restsensors.domain.Sensor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.relayr.dao;
+package org.restsensors.dao;
 
-import com.relayr.domain.Sensor;
+import org.restsensors.domain.Sensor;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**

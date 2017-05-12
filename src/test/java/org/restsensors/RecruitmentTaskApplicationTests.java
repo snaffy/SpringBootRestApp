@@ -1,4 +1,4 @@
-package com.relayr;
+package org.restsensors;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

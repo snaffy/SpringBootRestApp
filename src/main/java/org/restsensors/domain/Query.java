@@ -1,4 +1,4 @@
-package com.relayr.domain;
+package org.restsensors.domain;
 
 /**
  * Created by azygm on 21.04.2017.

@@ -1,8 +1,8 @@
-package com.relayr.controller;
+package org.restsensors.controller;
 
-import com.relayr.domain.Query;
-import com.relayr.service.SensorServiceImp;
-import com.relayr.domain.Sensor;
+import org.restsensors.domain.Query;
+import org.restsensors.service.SensorServiceImp;
+import org.restsensors.domain.Sensor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
